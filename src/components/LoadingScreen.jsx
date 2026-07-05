@@ -9,14 +9,12 @@ import doodle07 from '../assets/doodles/doodle-07.svg'
 import doodle08 from '../assets/doodles/doodle-08.svg'
 
 const DOODLE_ORDER = [
-  { src: doodle01, className: 'loading-doodle-01' },
-  { src: doodle02, className: 'loading-doodle-02' },
-  { src: doodle03, className: 'loading-doodle-03' },
-  { src: doodle04, className: 'loading-doodle-04' },
-  { src: doodle05, className: 'loading-doodle-05' },
-  { src: doodle06, className: 'loading-doodle-06' },
-  { src: doodle07, className: 'loading-doodle-07' },
-  { src: doodle08, className: 'loading-doodle-08' },
+  { src: doodle01, className: 'loading-doodle-01', motion: 'float' },
+  { src: doodle02, className: 'loading-doodle-02', motion: 'wiggle' },
+  { src: doodle03, className: 'loading-doodle-03', motion: 'breathe' },
+  { src: doodle04, className: 'loading-doodle-04', motion: 'float' },
+  { src: doodle05, className: 'loading-doodle-05', motion: 'wiggle' },
+  { src: doodle07, className: 'loading-doodle-07', motion: 'breathe' },
 ]
 
 function LoadingScreen({ onComplete }) {
@@ -37,18 +35,29 @@ function LoadingScreen({ onComplete }) {
   return (
     <div className={`loading-viewport ${isFading ? 'loading-fade' : ''}`}>
       <div className="loading-screen">
+        <div className="loading-ambient" />
+        <div className="loading-warm-glow" />
         <div className="loading-center">
-          <div className="loading-paper">
-            <div className="loading-header">
-              <p className="loading-eyebrow">SUZHOU FOOD PICKER</p>
-              <div>
-                <h1 className="loading-title">今天吃什么？</h1>
-                <p className="loading-subtitle">先选一个方向。</p>
+          <div className="loading-stack">
+            <div className="loading-paper">
+              <div className="loading-header">
+                <p className="loading-eyebrow">SUZHOU FOOD PICKER</p>
+                <div>
+                  <h1 className="loading-title">今天吃什么？</h1>
+                  <p className="loading-subtitle">Every meal is an adventure 🍽️</p>
+                </div>
               </div>
-            </div>
 
-            <div className="loading-progress">
-              <div className="loading-progress-bar" />
+              <div className="loading-progress">
+                <div className="loading-progress-track">
+                  <div className="loading-progress-fill" />
+                  <img
+                    className="loading-progress-runner"
+                    src={doodle06}
+                    alt="runner"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -59,7 +68,7 @@ function LoadingScreen({ onComplete }) {
               key={index}
               src={item.src}
               alt="doodle"
-              className={`loading-doodle ${item.className}`}
+              className={`loading-doodle ${item.className} ${item.motion}`}
             />
           ))}
         </div>
