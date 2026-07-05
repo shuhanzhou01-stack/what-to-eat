@@ -7,6 +7,7 @@ import doodle05 from '../assets/doodles/doodle-05.svg'
 import doodle06 from '../assets/doodles/doodle-06.svg'
 import doodle07 from '../assets/doodles/doodle-07.svg'
 import doodle08 from '../assets/doodles/doodle-08.svg'
+
 const DOODLE_ORDER = [
   { src: doodle01, className: 'loading-doodle-01' },
   { src: doodle02, className: 'loading-doodle-02' },
@@ -34,30 +35,34 @@ function LoadingScreen({ onComplete }) {
   }, [onComplete])
 
   return (
-    <div className={`loading-screen ${isFading ? 'loading-fade' : ''}`}>
-      <div className="loading-paper">
-        <div className="loading-header">
-          <p className="loading-eyebrow">SUZHOU FOOD PICKER</p>
-          <div>
-            <h1 className="loading-title">今天吃什么？</h1>
-            <p className="loading-subtitle">先选一个方向。</p>
+    <div className={`loading-viewport ${isFading ? 'loading-fade' : ''}`}>
+      <div className="loading-screen">
+        <div className="loading-center">
+          <div className="loading-paper">
+            <div className="loading-header">
+              <p className="loading-eyebrow">SUZHOU FOOD PICKER</p>
+              <div>
+                <h1 className="loading-title">今天吃什么？</h1>
+                <p className="loading-subtitle">先选一个方向。</p>
+              </div>
+            </div>
+
+            <div className="loading-progress">
+              <div className="loading-progress-bar" />
+            </div>
           </div>
         </div>
 
-        <div className="loading-progress">
-          <div className="loading-progress-bar" />
+        <div className="loading-doodles">
+          {DOODLE_ORDER.map((item, index) => (
+            <img
+              key={index}
+              src={item.src}
+              alt="doodle"
+              className={`loading-doodle ${item.className}`}
+            />
+          ))}
         </div>
-      </div>
-
-      <div className="loading-doodles">
-        {DOODLE_ORDER.map((item, index) => (
-          <img
-            key={index}
-            src={item.src}
-            alt="doodle"
-            className={`loading-doodle ${item.className}`}
-          />
-        ))}
       </div>
     </div>
   )

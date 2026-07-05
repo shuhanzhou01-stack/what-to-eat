@@ -573,10 +573,10 @@ p {
 .loading-screen {
   position: fixed;
   inset: 0;
-  display: grid;
-  place-items: center;
-  background: transparent;
+  width: 100%;
+  min-height: 100vh;
   overflow: hidden;
+  background-color: #fbfaf5;
   z-index: 60;
   opacity: 1;
   transition: opacity 0.36s ease;
@@ -626,16 +626,20 @@ p {
 .loading-title {
   font-family: "Xiaolai SC", "PingFang SC", "Microsoft YaHei", sans-serif !important;
   font-weight: 400 !important;
-  font-size: clamp(60px, 7vw, 96px);
-  letter-spacing: -0.04em;
+  font-size: clamp(64px, 8vw, 116px);
   line-height: 1;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  text-align: center;
   color: #222;
   margin: 0;
-  transform: rotate(-1deg) translateY(2px);
+  transform: rotate(-1deg);
 }
 
 .loading-progress {
-  margin: 32px auto 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 32px;
   width: 220px;
   height: 2px;
   border-radius: 999px;
@@ -653,101 +657,117 @@ p {
   animation: progressDraw 3s ease forwards;
 }
 
+.loading-screen {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.loading-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: min(92vw, 1100px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/food-bg.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.28;
+  z-index: 0;
+}
+
+.loading-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(251, 250, 245, 0.04),
+    rgba(251, 250, 245, 0.18) 82%
+  );
+  z-index: 1;
+}
+
 .loading-doodles {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 .loading-doodle {
   position: absolute;
-  opacity: 0;
-  transform: translateY(18px) rotate(0deg) scale(1);
-  animation: doodleIn 0.7s ease forwards;
-  /* keep original color but soften */
-  filter: saturate(0.72) brightness(0.98);
+  width: var(--size);
   max-width: 120px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.78;
+  filter: saturate(0.82) brightness(0.98);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .loading-doodle.loading-doodle-01 {
-  top: 8%;
-  left: 6%;
-  width: 100px;
-  opacity: 0.78;
-  transform: translateY(24px) rotate(-6deg) scale(0.96);
-  animation-delay: 0.08s;
+  left: 7%;
+  top: 10%;
+  --size: 90px;
 }
 
 .loading-doodle.loading-doodle-02 {
-  top: 22%;
-  left: 8%;
-  width: 70px;
-  opacity: 0.72;
-  transform: translateY(18px) rotate(4deg) scale(0.98);
-  animation-delay: 0.16s;
+  left: 9%;
+  top: 38%;
+  --size: 58px;
 }
 
 .loading-doodle.loading-doodle-03 {
-  bottom: 36%;
-  left: 8%;
-  width: 46px;
-  opacity: 0.68;
-  transform: translateY(18px) rotate(-3deg) scale(1);
-  animation-delay: 0.22s;
+  left: 17%;
+  bottom: 13%;
+  --size: 86px;
 }
 
 .loading-doodle.loading-doodle-04 {
-  top: 8%;
-  right: 10%;
-  width: 70px;
-  opacity: 0.68;
-  transform: translateY(18px) rotate(5deg) scale(0.98);
-  animation-delay: 0.28s;
+  right: 9%;
+  top: 12%;
+  --size: 78px;
 }
 
 .loading-doodle.loading-doodle-05 {
-  top: 18%;
-  left: 44%;
-  width: 50px;
-  opacity: 0.72;
-  transform: translateY(18px) rotate(2deg) scale(0.98);
-  animation-delay: 0.34s;
+  right: 12%;
+  top: 44%;
+  --size: 76px;
 }
 
 .loading-doodle.loading-doodle-06 {
-  bottom: 30%;
-  right: 14%;
-  width: 70px;
-  opacity: 0.74;
-  transform: translateY(20px) rotate(3deg) scale(0.96);
-  animation-delay: 0.4s;
+  right: 18%;
+  bottom: 12%;
+  --size: 82px;
 }
 
 .loading-doodle.loading-doodle-07 {
-  bottom: 12%;
-  left: 14%;
-  width: 100px;
-  opacity: 0.7;
-  transform: translateY(16px) rotate(-4deg) scale(0.95);
-  animation-delay: 0.46s;
+  left: 43%;
+  top: 18%;
+  --size: 62px;
 }
 
 .loading-doodle.loading-doodle-08 {
-  bottom: 12%;
-  right: 16%;
-  width: 56px;
-  opacity: 0.68;
-  transform: translateY(18px) rotate(6deg) scale(0.98);
-  animation-delay: 0.52s;
-}
-
-.loading-doodle img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: saturate(0.72) brightness(0.98);
-  opacity: 0.88;
-  transition: transform 0.28s ease, opacity 0.28s ease;
+  right: 42%;
+  bottom: 16%;
+  --size: 58px;
 }
 
 @keyframes progressDraw {
